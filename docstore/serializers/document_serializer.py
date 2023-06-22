@@ -8,6 +8,7 @@ class DocumentSerializer(serializers.ModelSerializer):
     updated_by = serializers.ReadOnlyField(source="updated_by.username")
     file = serializers.FileField(required=True)
     topic_detail = serializers.SerializerMethodField()
+    folder_detail = serializers.SerializerMethodField()
     is_active = serializers.BooleanField(read_only=True)
 
     class Meta:
@@ -24,10 +25,15 @@ class DocumentSerializer(serializers.ModelSerializer):
             "updated_at",
             "updated_by",
             "topic_detail",
+            "folder_detail"
         ]
 
     def get_topic_detail(self, instance):
         from docstore.serializers import TopicSerializer
-
         serializer = TopicSerializer(instance.topic)
+        return serializer.data
+
+    def get_folder_detail(self, instance):
+        from docstore.serializers import ReadOnlyFolderSerializer
+        serializer = ReadOnlyFolderSerializer(instance.folder)
         return serializer.data

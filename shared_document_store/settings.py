@@ -162,6 +162,8 @@ SWAGGER_SETTINGS = {
     "DEFAULT_AUTHENTICATION": "rest_framework_simplejwt.authentication.JWTAuthentication",
 }
 
+LOGIN_URL = '/admin/'
+
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = env("EMAIL_HOST", default="your-smtp-host")

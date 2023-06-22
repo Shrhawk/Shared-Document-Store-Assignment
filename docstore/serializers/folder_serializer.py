@@ -39,3 +39,7 @@ class FolderSerializer(serializers.ModelSerializer):
             serializer = self.__class__(obj.parent_folder)
             return serializer.data
         return None
+
+
+class ReadOnlyFolderSerializer(FolderSerializer):
+    documents = None
